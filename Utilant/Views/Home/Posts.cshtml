@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Utilant.Models.Post>
+
+@{
+    ViewBag.Title = "Posts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Name's Posts</h2>
+
+    <hr />
+    @foreach (var item in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                @Html.DisplayFor(modelItem => item.title)
+            </div>
+
+            <div class="card-body">
+                @Html.DisplayFor(modelItem => item.body)
+            </div>
+        </div>
+        <br />
+    }
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

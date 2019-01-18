@@ -1,0 +1,82 @@
+﻿@model Utilant.Models.User
+
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Users</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            Username
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.username)
+        </dd>
+
+        <dt>
+            Email
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            Address
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address.street),
+            @Html.DisplayFor(model => model.address.suite)<br />
+            @Html.DisplayFor(model => model.address.city),
+            @Html.DisplayFor(model => model.address.zipcode)<br />
+            Latitude: @Html.DisplayFor(model => model.address.geo.lat)<br />
+            Longitude: @Html.DisplayFor(model => model.address.geo.lng)
+        </dd>
+
+        <dt>
+            Phone Number
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+        <dt>
+            Website
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.website)
+        </dd>
+
+        <dt>
+            Company
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.company.name)<br />
+            @Html.DisplayFor(model => model.company.catchPhrase)<br />
+            @Html.DisplayFor(model => model.company.bs)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("View Posts", "Posts", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

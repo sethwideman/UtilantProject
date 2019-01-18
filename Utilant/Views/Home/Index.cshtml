@@ -1,31 +1,93 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model PagedList.IPagedList<Utilant.Models.AlbumViewModel>
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Albums";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<h2>Albums</h2>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+@using (Html.BeginForm())
+{
+    <p>
+        <table>
+            <tr>
+                <td>
+                    Find by Title:
+                </td>
+                <td>
+                    @Html.TextBox("titleSearch", ViewBag.TitleSearch as string)
+                </td>
+                <td rowspan="2">
+                    <input type="Submit" value="Search" class="btn btn-outline-info" data-toggle="tooltip"
+                           data-placement="top" title="You can search both at the same time." />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Find by User's Name:
+                </td>
+                <td>
+                    @Html.TextBox("nameSearch", ViewBag.NameSearch as string)
+                </td>
+            </tr>
+        </table>
+    </p>
+}
+
+<table class="table table-striped">
+    <tr align="center">
+        <th>
+            Thumbnail
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            User's Name
+        </th>
+        <th>
+            User's Email
+        </th>
+        <th>
+            User's Phone
+        </th>
+        <th>
+            User's Address
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr align="center">
+            <td>
+                <img src=@Html.DisplayFor(modelItem => item.thumbnail) class="img-thumbnail" />
+            </td>
+            <td>@* Calls Photos Action in Home Controller*@
+                @Html.ActionLink(item.Title, "Photos", new { id = item.albumId})
+            </td>
+            <td>@* Calls Users Action in Home Controller*@
+                @Html.ActionLink(item.UsersName, "Users", new { id = item.UsersId})
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsersEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsersPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsersAddress)
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+
+@* Paging function *@
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, titleSearch = ViewBag.TitleFilter, nameSearch = ViewBag.NameFilter }))
