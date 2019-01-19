@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Users</h2>
+<h2>User</h2>
+<div align="right">@Html.ActionLink("Back to List", "Index")</div>
 
 <div>
-    <h4>User</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -76,7 +76,7 @@
 
     </dl>
 </div>
+<hr />
 <p>
-    @Html.ActionLink("View Posts", "Posts", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("View Posts", "Posts", new { id = Model.id })
 </p>

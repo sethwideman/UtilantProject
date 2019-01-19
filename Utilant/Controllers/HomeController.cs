@@ -44,7 +44,7 @@ namespace Utilant.Controllers
         public ActionResult Photos(int id)
         {
             Repository repo = new Repository();
-            List<Photo> photos = repo.getPhotosVM(id);
+            PhotosViewModel photos = repo.getPhotosVM(id);
             return View(photos);
         }
 

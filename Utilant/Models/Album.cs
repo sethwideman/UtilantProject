@@ -10,9 +10,5 @@ namespace Utilant.Models
         public int userId { get; set; }
         public int id { get; set; }
         public String title { get; set; }
-
-        public virtual User User { get; set; }
-        public virtual IEnumerable<Photo> Photos { get; set; }
-
     }
 }

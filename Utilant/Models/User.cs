@@ -38,8 +38,6 @@ namespace Utilant.Models
         public string website { get; set; }
         public Company company { get; set; }
 
-        public virtual ICollection<Album> Albums { get; set; }
-
         public String getAddress()
         {
             String s = "";

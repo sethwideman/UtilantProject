@@ -148,6 +148,7 @@
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\AlbumViewModel.cs" />
     <Compile Include="Models\Photo.cs" />
+    <Compile Include="Models\PhotosViewModel.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -232,7 +233,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Album\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

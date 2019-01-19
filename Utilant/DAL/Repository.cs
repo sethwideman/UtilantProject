@@ -39,15 +39,19 @@ namespace Utilant.DAL
             return albumVM;
         }
 
-        public List<Photo> getPhotosVM(int albumId)
+        public PhotosViewModel getPhotosVM(int albumId)
         {
             List<Photo> tmp = this.getPhotos();
             var photos = from s in tmp
                          select s;
 
             photos = photos.Where(s => s.albumId == albumId);
-
-            return photos.ToList();
+            PhotosViewModel PhotosVM = new PhotosViewModel();
+            PhotosVM.Photos = photos.ToList();
+            Album album = getAlbums().Find(x => x.id == albumId);
+            PhotosVM.Title = album.title;
+            PhotosVM.UsersName = getUser(album.userId).name;
+            return PhotosVM;
         }
 
         public User getUser(int userId)
